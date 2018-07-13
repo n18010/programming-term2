@@ -14,8 +14,7 @@ print(str_line)
 # 掛けられる数と乗算結果の表示
 for x in range(1, 10):
     str_line = ""
-    str_line = str_line + str(x).rjust(2)
-    str_line = str_line + "|"
+    str_line = str_line + str(x).rjust(2) + "|"
     for y in range(1, 10):
         str_line = str_line + str(x * y).rjust(3)
     print(str_line)
