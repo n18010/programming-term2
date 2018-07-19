@@ -33,11 +33,8 @@ while is_ordering:
                 order_list.append(order)
                 sum_v += option_menu[order]
                 order = input("他にオプションメニューの注文はございますか？ ")
-                continue
             else:
                 print("選択されたオプションはありません")
                 order = input("他にオプションメニューの注文はございますか？ ")
-                continue
     else:
         print("選択されたメニューはありません")
-        continue
