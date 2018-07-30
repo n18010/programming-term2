@@ -47,7 +47,6 @@ cur_x = 0  # 前に進んだ値の合計のための変数
 while cur_x != goal:
     input("サイコロを振ってください")
     go_forward(shake_dice())
-    if cur_x < goal:
-        print("{0}が出ました。現在位置は{1}です。".format(dice, cur_x))
+    print("{0}が出ました。現在位置は{1}です。".format(dice, cur_x))
 
 print("{0}が出ました。おめでとうございます、ゴールしました！".format(dice))
