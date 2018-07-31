@@ -1,5 +1,9 @@
 # 自動双六プログラム ゴールちょうどバージョン
 
+goal = 10  # 双六のゴール値
+
+cur_x = 0  # 前に進んだ値の合計のための変数
+
 
 def shake_dice():
     """
@@ -39,10 +43,6 @@ def go_forward(n):
     if cur_x > goal:
         cur_x -= (cur_x - goal) * 2
 
-
-goal = 10  # 双六のゴール値
-
-cur_x = 0  # 前に進んだ値の合計のための変数
 
 while cur_x != goal:
     input("サイコロを振ってください")
