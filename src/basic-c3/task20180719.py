@@ -107,15 +107,15 @@ while True:
             print(sentence.format(round(add(num1, num2), 3)))
             print(help(add))
             break
-        if operator_dict[user] == 2:
+        elif operator_dict[user] == 2:
             print(sentence.format(round(sub(num1, num2), 3)))
             print(help(sub))
             break
-        if operator_dict[user] == 3:
+        elif operator_dict[user] == 3:
             print(sentence.format(round(mul(num1, num2), 3)))
             print(help(mul))
             break
-        if operator_dict[user] == 4:
+        elif operator_dict[user] == 4:
             try:
                 print(sentence.format(round(div(num1, num2), 3)))
                 print(help(div))
