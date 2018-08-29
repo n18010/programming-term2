@@ -13,7 +13,7 @@ FILE_LOG = "test-record.txt"
 
 
 # HTMLを画面に出力する
-def print_html(sum_score, ave_score, table_list):
+def print_html(style, sum_score, ave_score, table_list):
     # ヘッダを出力
     print("Content-Type: text/html; charset=utf-8")
     print("")
@@ -22,35 +22,41 @@ def print_html(sum_score, ave_score, table_list):
 <html>
 <head><meta charset="utf-8">
 <title>成績表</title>
+<style>
+{0}
+</style>
 </head>
 <body>
 <h1>成績表</h1>
 <div><form>
-名前: <input type="text" name="name" size="8">
+名前: <input type="text" name="name" size="15">
 点数: <input type="text" name="score" size="8">
 <input type="submit" value="追加">
 <input type="hidden" name="mode" value="write">
 </form></div><hr>
-<p>合計点 {0}</p>
-<p>平均点 {1}</p>
-<table style="border-collapse: collapse;">
-<tr>
-<th style='border: 1px solid;'>名前</th><th style='border: 1px solid;'>点数</th><th style='border: 1px solid;'>差</th>
-</tr>
-{2}
+<p>合計点 {1}</p>
+<p>平均点 {2}</p>
+<table>
+<tr><th>名前</th><th>点数</th><th>差</th></tr>
+{3}
 </table>
 </body>
 </html>
-    """.format(sum_score, ave_score, table_list))
+    """.format(style, sum_score, ave_score, table_list))
 
 
 # 画面に書き込みログを表示する
 def mode_read(form):
-    # ログを読み取る
     sum_score = 0
     table_list = []
     total = 0
     avg_score = 0
+    style = """
+table {border-collapse: collapse;}
+th, td {border: 1px solid; padding: 0 20px;}
+.right {text-align: right;}
+"""
+    # ログを読み取る
     if os.path.exists(FILE_LOG):
         with open(FILE_LOG, "r", encoding='utf-8') as f:
             for line in f:
@@ -66,9 +72,11 @@ def mode_read(form):
                 list_a = line.split(",")
                 name = html.escape(list_a[0])
                 diff_score = round(avg_score - int(list_a[1]), 2)
-                table_td = "<tr><td style='border: 1px solid;'>{0}</td><td style='border: 1px solid;'>{1}</td><td style='border: 1px solid;'>{2}</td></tr>".format(name, list_a[1], diff_score)
+                table_td = """
+<tr><td>{0}</td><td class="right">{1}</td><td class="right">{2}</td></tr>
+                """.format(name, list_a[1], diff_score)
                 table_list.append(table_td)
-    print_html(sum_score, avg_score, "\n".join(table_list))
+    print_html(style, sum_score, avg_score, "\n".join(table_list))
 
 
 # 任意のURLにジャンプする
